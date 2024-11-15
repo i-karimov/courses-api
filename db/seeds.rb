@@ -3,7 +3,7 @@ Course.destroy_all
 Skill.destroy_all
 Author.destroy_all
 
-10.times do
+21.times do
   author = FactoryBot.create(:author)
   3.times do
     course = FactoryBot.create(:course, author: author)

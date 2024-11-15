@@ -1,6 +1,6 @@
 class Api::V1::AuthorsController < ApplicationController
   def index
-    _pagy, @authors = pagy(Author.all)
+    @pagy, @authors = pagy(Author.all)
     render json: @authors
   end
 
