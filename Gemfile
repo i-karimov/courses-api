@@ -42,6 +42,8 @@ group :development, :test do
   gem 'rswag-specs'
   gem 'factory_bot_rails', '~> 6.4.4'
   gem 'ffaker', '~> 2.20'
+  gem 'pry-rails'
+  gem 'pry-byebug'
 end
 
 gem 'rswag-api'
