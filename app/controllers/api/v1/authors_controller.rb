@@ -20,7 +20,7 @@ class Api::V1::AuthorsController < ApplicationController
 
   def update
     @author = Author.find(params[:id])
-    if @author.update_attributes(author_params)
+    if @author.update(author_params)
       render json: @author
     else
       render json: @author.errors, status: :unprocessable_entity

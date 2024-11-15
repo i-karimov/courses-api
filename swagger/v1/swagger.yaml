@@ -1,0 +1,104 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/authors":
+    get:
+      summary: list authors
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create author
+      parameters: []
+      responses:
+        '201':
+          description: successful
+        '422':
+          description: missing mandatory fields
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                email:
+                  type: string
+              required:
+              - first_name
+              - last_name
+              - email
+  "/api/v1/authors/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show author
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update author
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                email:
+                  type: string
+    put:
+      summary: update author
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                email:
+                  type: string
+              require:
+              - first_name
+              - last_name
+              - email
+    delete:
+      summary: delete author
+      responses:
+        '204':
+          description: successful
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com

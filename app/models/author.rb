@@ -1,5 +1,5 @@
 class Author < ApplicationRecord
-  before_destroy ->(_author) { raise "Implement the logic of orphan courses` author reassignment on layer above" }
+  # before_destroy ->(_author) { raise "Implement the logic of orphan courses` author reassignment on layer above" }
 
   has_many :courses
 
