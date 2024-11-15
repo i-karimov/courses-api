@@ -13,7 +13,7 @@ RSpec.describe 'api/v1/authors', type: :request do
           end
           run_test! do
           end
-        end 
+        end
       end
 
     post('create author') do
@@ -38,7 +38,11 @@ RSpec.describe 'api/v1/authors', type: :request do
             }
           }
         end
-        run_test!
+
+        it "creates deadline_request" do |example|
+          expect { submit_request(example.metadata) }.to change(Author, :count).by(1)
+          assert_response_matches_metadata(example.metadata)
+        end
       end
 
       response '422', 'missing mandatory fields' do
@@ -115,7 +119,7 @@ RSpec.describe 'api/v1/authors', type: :request do
           last_name: { type: :string },
           email: { type: :string }
         },
-        require: ['first_name', 'last_name', 'email']
+        require: [ 'first_name', 'last_name', 'email' ]
       }
 
       response(200, 'successful') do
