@@ -1,8 +1,8 @@
 class Api::V1::AuthorsController < ApplicationController
   before_action :set_author!, only: [:show, :update, :destroy]
   def index
-    @pagy, @authors = pagy(Author.all)
-    render json: @authors
+    @pagy, authors = pagy(Author.all)
+    render json: authors
   end
 
   def show
@@ -10,11 +10,12 @@ class Api::V1::AuthorsController < ApplicationController
   end
 
   def create
-    @author = Author.new(author_params)
-    if @author.save
-      render json: @author, status: :created
+    author = Author.new(author_params)
+
+    if author.save
+      render json: author, status: :created
     else
-      render json: @author.errors, status: :unprocessable_entity
+      render json: author.errors, status: :unprocessable_entity
     end
   end
 
