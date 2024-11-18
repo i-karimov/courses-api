@@ -1,5 +1,5 @@
 class Api::V1::AuthorsController < ApplicationController
-  before_action :set_author!, only: [:show, :update, :destroy]
+  before_action :set_author!, only: [ :show, :update, :destroy ]
   def index
     @pagy, authors = pagy(Author.all)
     render json: authors
@@ -28,8 +28,13 @@ class Api::V1::AuthorsController < ApplicationController
   end
 
   def destroy
-    @author.destroy
-    head :no_content
+    result = Authors::DestroyCommand.new(ex_author: @author).call
+
+    if result.success?
+      render json: result.value!
+    else
+      render json: result.failure, status: :internal_server_error
+    end
   end
 
   private
