@@ -5,10 +5,11 @@ module Authors
       extend Dry::Initializer
 
     option :ex_author, reader: :private
+    option :new_candiate, optional: true
     option :find_candidate_service, reader: :private, default: -> { FindCandidate.new(ex_author:) }
 
     def call
-      found_candidate = yield find_candidate_service.call
+      found_candidate = new_candiate || (yield find_candidate_service.call)
 
       begin
       ActiveRecord::Base.transaction do
