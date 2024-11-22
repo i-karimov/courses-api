@@ -25,8 +25,14 @@ RSpec.describe Authors::DestroyCommand do
         expect(newly_appointed_author.courses.size).to eq(3)
       end
 
-      it 'delivers notification to new author' do
-        expect { destroy_author.call }.to change(ActionMailer::Base.deliveries, :size).by(1)
+      it 'sends an email' do
+        expect {
+          destroy_author.call
+        }.to change { ActionMailer::Base.deliveries.size }.by(1)
+
+        mail = ActionMailer::Base.deliveries.last
+        expect(mail.to).to include(delegee_author.email)
+        expect(mail.subject).to eq 'New Courses Assigned'
       end
     end
 

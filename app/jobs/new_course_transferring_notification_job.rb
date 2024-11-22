@@ -3,6 +3,6 @@ class NewCourseTransferringNotificationJob < ApplicationJob
 
   def perform(author_id)
     author = Author.find(author_id)
-    AuthorMailer.new_courses_transferred(author).deliver_later
+    AuthorMailer.new_courses_transferred(author).deliver_now
   end
 end
