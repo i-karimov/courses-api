@@ -5,16 +5,17 @@ module Authors
       extend Dry::Initializer
 
     option :ex_author, reader: :private
-    option :new_candiate, optional: true
-    option :find_candidate_service, reader: :private, default: -> { FindCandidate.new(ex_author:) }
+    option :new_candidate, optional: true
+    option :find_candidate_service, reader: :private, default: proc { FindCandidate.new(ex_author:) }
 
     def call
-      found_candidate = new_candiate || (yield find_candidate_service.call)
+      found_candidate = new_candidate || (yield find_candidate_service.call)
 
       begin
       ActiveRecord::Base.transaction do
         yield delegate_ex_author_courses!(found_candidate)
         yield destroy_ex_author!
+        yield notify_new_author(found_candidate)
       end
       Success(found_candidate)
       rescue => e
@@ -34,6 +35,12 @@ module Authors
 
     def destroy_ex_author!
       ex_author.destroy!
+
+      Success()
+    end
+
+    def notify_new_author(author)
+      NewCourseTransferringNotificationJob.perform_later(author.id)
 
       Success()
     end

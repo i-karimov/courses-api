@@ -24,6 +24,10 @@ RSpec.describe Authors::DestroyCommand do
       it 'does not affect new author`s own courses' do
         expect(newly_appointed_author.courses.size).to eq(3)
       end
+
+      it 'delivers notification to new author' do
+        expect { destroy_author.call }.to change(ActionMailer::Base.deliveries, :size).by(1)
+      end
     end
 
     context "when no authors left in DB" do

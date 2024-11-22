@@ -1,0 +1,11 @@
+<h1>New Courses Notification</h1>
+<p>Dear <%= @author.first_name %> <%= @author.last_name%>, new courses has been transferred:</p>
+<ul>
+  <% @author.courses.each do |course| %>
+    <li>Title: <%= course.title %></li>
+    <li>Description: <%= course.description %></li>
+  <% end %>
+</ul>
+<p>Thank you for your attention.</p>
+<p>Best regards,</p>
+<p>Your Team</p>
