@@ -309,7 +309,14 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.6.0)
+    unicode-emoji (3.7.0)
+      unicode-version (~> 1.0)
+    unicode-version (1.4.0)
     useragent (0.16.10)
+    valid_email2 (6.0.0)
+      activemodel (>= 6.0)
+      mail (~> 2.5)
+      unicode-emoji (~> 3.7.0)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -347,6 +354,7 @@ DEPENDENCIES
   rubocop-rails-omakase
   sidekiq
   tzinfo-data
+  valid_email2
 
 BUNDLED WITH
    2.5.14
