@@ -63,6 +63,7 @@ RSpec.describe 'api/v1/authors', type: :request do
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
     get('Получить данные автора') do
+      description 'Возвращает данные автора вместе с его курсами'
       produces "application/json"
       response(200, 'Успешно') do
         let!(:id) { create(:author).id }
@@ -118,7 +119,7 @@ RSpec.describe 'api/v1/authors', type: :request do
       let(:ex_author) { create(:author) }
       let(:id) { ex_author.id }
 
-      
+
       response(200, 'Автор успешно удален. Данные нового автора возвращаются в теле ответа.') do
         before { create(:author) }
 

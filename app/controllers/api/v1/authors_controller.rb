@@ -1,7 +1,7 @@
 class Api::V1::AuthorsController < ApplicationController
   def index
     @pagy, authors = pagy(Author.all)
-    render json: authors, each_serializer: serializer
+    render json: authors, each_serializer:
   end
 
   def show
@@ -47,7 +47,11 @@ class Api::V1::AuthorsController < ApplicationController
     params.require(:author).permit(:first_name, :last_name, :email)
   end
 
+  def each_serializer
+    Api::V1::AuthorIndexSerializer
+  end
+
   def serializer
-    AuthorSerializer
+    Api::V1::AuthorSerializer
   end
 end

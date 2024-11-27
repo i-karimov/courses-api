@@ -4,6 +4,93 @@ info:
   title: API V1
   version: v1
 paths:
+  "/api/v1/authors/{author_id}/courses":
+    parameters:
+    - name: author_id
+      in: path
+      required: true
+      description: Author ID
+      schema:
+        type: integer
+    post:
+      summary: Create a course
+      tags:
+      - Courses
+      parameters: []
+      responses:
+        '201':
+          description: course created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - title
+              - description
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+  "/api/v1/authors/{author_id}/courses/{id}":
+    parameters:
+    - name: author_id
+      in: path
+      required: true
+      description: Author ID
+      schema:
+        type: integer
+    - name: id
+      in: path
+      required: true
+      description: Course ID
+      schema:
+        type: integer
+    get:
+      summary: Show a course
+      tags:
+      - Courses
+      responses:
+        '200':
+          description: successful
+        '404':
+          description: not found
+    put:
+      summary: Update a course
+      tags:
+      - Courses
+      parameters: []
+      responses:
+        '200':
+          description: successful
+        '422':
+          description: invalid request
+        '404':
+          description: not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                content:
+                  type: string
+    delete:
+      summary: Delete a course
+      tags:
+      - Courses
+      responses:
+        '204':
+          description: successful
+        '404':
+          description: not found
   "/api/v1/authors":
     get:
       summary: Список авторов
@@ -52,6 +139,7 @@ paths:
         type: string
     get:
       summary: Получить данные автора
+      description: Возвращает данные автора вместе с его курсами
       responses:
         '200':
           description: Успешно
