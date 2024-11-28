@@ -19,9 +19,9 @@ paths:
       - Курсы автора
       responses:
         '200':
-          description: successful
+          description: Успешный запрос
         '404':
-          description: not found
+          description: Автор не найден
     post:
       summary: Добавить автору новый курс
       tags:
@@ -29,9 +29,9 @@ paths:
       parameters: []
       responses:
         '201':
-          description: course created
+          description: Курс успешно создан
         '422':
-          description: invalid request
+          description: Некорректный запрос
       requestBody:
         content:
           application/json:
@@ -67,9 +67,9 @@ paths:
       - Курсы автора
       responses:
         '200':
-          description: successful
+          description: Успешный запрос
         '404':
-          description: not found
+          description: Автор или курс не найден
     put:
       summary: Обновить данные курса автора
       tags:
@@ -77,11 +77,11 @@ paths:
       parameters: []
       responses:
         '200':
-          description: successful
+          description: Успешно обновлено
         '422':
-          description: invalid request
+          description: Недопустимый запрос
         '404':
-          description: not found
+          description: Курс не найден
       requestBody:
         content:
           application/json:
@@ -100,9 +100,9 @@ paths:
       - Курсы автора
       responses:
         '204':
-          description: successful
+          description: Успешно удалено
         '404':
-          description: not found
+          description: Курс не найден
   "/api/v1/authors":
     get:
       summary: Список авторов

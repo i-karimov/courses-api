@@ -8,7 +8,7 @@ RSpec.describe 'V1 Author Courses API', type: :request do
       tags 'Курсы автора'
       produces 'application/json'
 
-      response '200', 'successful' do
+      response '200', 'Успешный запрос' do
         let(:author) { create(:author) }
         let(:author_id) { author.id }
         let(:courses) { create_list(:course, 3, author: author) }
@@ -16,7 +16,7 @@ RSpec.describe 'V1 Author Courses API', type: :request do
         run_test!
       end
 
-      response '404', 'not found' do
+      response '404', 'Автор не найден' do
         let(:author_id) { 'author_id' }
 
         run_test!
@@ -41,11 +41,11 @@ RSpec.describe 'V1 Author Courses API', type: :request do
         }
       }
 
-      response '201', 'course created' do
+      response '201', 'Курс успешно создан' do
         run_test!
       end
 
-      response '422', 'invalid request' do
+      response '422', 'Некорректный запрос' do
         let(:course) { { title: nil, description: nil } }
         run_test!
       end
@@ -56,11 +56,11 @@ RSpec.describe 'V1 Author Courses API', type: :request do
     parameter name: 'author_id', in: :path, type: :integer, required: true, description: 'Author ID'
     parameter name: 'id', in: :path, type: :integer, required: true, description: 'Course ID'
 
-    get 'Show a course' do
+    get 'Показать курс автора' do
       tags 'Курсы автора'
       produces 'application/json'
 
-      response '200', 'successful' do
+      response '200', 'Успешный запрос' do
         let(:author) { create(:author) }
         let(:author_id) { author.id }
         let(:course) { create(:course, author: author) }
@@ -69,7 +69,7 @@ RSpec.describe 'V1 Author Courses API', type: :request do
         run_test!
       end
 
-      response '404', 'not found' do
+      response '404', 'Автор или курс не найден' do
         let(:author) { create(:author) }
         let(:author_id) { author.id }
         let(:id) { 'invalid' }
@@ -92,7 +92,7 @@ RSpec.describe 'V1 Author Courses API', type: :request do
         }
       }
 
-      response '200', 'successful' do
+      response '200', 'Успешно обновлено' do
         let(:author) { create(:author) }
         let(:author_id) { author.id }
         let(:course) { create(:course, author: author) }
@@ -102,7 +102,7 @@ RSpec.describe 'V1 Author Courses API', type: :request do
         run_test!
       end
 
-      response '422', 'invalid request' do
+      response '422', 'Недопустимый запрос' do
         let(:author) { create(:author) }
         let(:author_id) { author.id }
         let!(:persisted_course) { create(:course, author: author) }
@@ -112,7 +112,7 @@ RSpec.describe 'V1 Author Courses API', type: :request do
         run_test!
       end
 
-      response '404', 'not found' do
+      response '404', 'Курс не найден' do
         let(:author) { create(:author) }
         let(:author_id) { author.id }
         let(:id) { 'invalid' }
@@ -125,7 +125,7 @@ RSpec.describe 'V1 Author Courses API', type: :request do
     delete 'Удалить курс у автора' do
       tags 'Курсы автора'
 
-      response '204', 'successful' do
+      response '204', 'Успешно удалено' do
         let(:author) { create(:author) }
         let(:author_id) { author.id }
         let(:course) { create(:course, author: author) }
@@ -134,7 +134,7 @@ RSpec.describe 'V1 Author Courses API', type: :request do
         run_test!
       end
 
-      response '404', 'not found' do
+      response '404', 'Курс не найден' do
         let(:author) { create(:author) }
         let(:author_id) { author.id }
         let(:id) { 'invalid' }
