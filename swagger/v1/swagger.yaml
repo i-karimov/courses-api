@@ -13,6 +13,15 @@ paths:
       description: Author ID
       schema:
         type: integer
+    get:
+      summary: Получить список курсов автора
+      tags:
+      - Курсы автора
+      responses:
+        '200':
+          description: successful
+        '404':
+          description: not found
     post:
       summary: Добавить автору новый курс
       tags:
@@ -36,27 +45,8 @@ paths:
                   type: string
                 description:
                   type: string
-  "/api/v1/authors/{author_id}/courses/{course_id}":
-    parameters:
-    - name: author_id
-      in: path
-      description: author id
-      required: true
-      schema:
-        type: string
-    - name: course_id
-      in: path
-      description: course id
-      required: true
-      schema:
-        type: string
-    get:
-      summary: Получить расширенные данные курса автора
-      tags:
-      - Курсы автора
-      responses:
-        '200':
-          description: Успешно
+                content:
+                  type: string
   "/api/v1/authors/{author_id}/courses/{id}":
     parameters:
     - name: author_id
@@ -215,6 +205,13 @@ paths:
       required: true
       schema:
         type: string
+    get:
+      summary: Получить список компетенций курса
+      tags:
+      - Компетенции курса
+      responses:
+        '200':
+          description: successful
     post:
       summary: Создание компетенции для курса
       tags:

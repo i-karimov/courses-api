@@ -4,6 +4,10 @@ module Api
       before_action :set_author!
       before_action :set_course!, only: [ :show, :update, :destroy ]
 
+      def index
+        render json: @author.courses, each_serializer:
+      end
+
       def show
         render json: @course, serializer:
       end
@@ -43,6 +47,10 @@ module Api
 
       def course_params
         params.require(:course).permit(:title, :description, :content)
+      end
+
+      def each_serializer
+        serializer
       end
 
       def serializer

@@ -4,6 +4,24 @@ RSpec.describe '/api/v1/courses/skills', type: :request do
   path '/api/v1/courses/{course_id}/skills' do
     parameter name: 'course_id', in: :path, type: :string, description: 'ID of the course'
 
+    get 'Получить список компетенций курса' do
+      tags 'Компетенции курса'
+      produces 'application/json'
+
+      response '200', 'successful' do
+        let(:author) { create(:author) }
+        let(:course_id) { create(:course, author:, skills: create_list(:skill, 3)).id }
+        
+        run_test!
+      end
+
+      # response '404', 'not found' do
+      #   let(:author_id) { 'author_id' }
+
+      #   run_test!
+      # end
+    end
+
     post 'Создание компетенции для курса' do
       tags 'Компетенции курса'
       consumes 'application/json'
