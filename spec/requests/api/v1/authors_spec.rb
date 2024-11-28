@@ -3,6 +3,7 @@ require 'swagger_helper'
 RSpec.describe 'api/v1/authors', type: :request do
     path '/api/v1/authors' do
       get('Список авторов') do
+        tags "Авторы"
         produces 'application/json'
 
         parameter(name: 'page', in: :query, required: false, description: 'Номер страницы', type: :integer)
@@ -13,6 +14,7 @@ RSpec.describe 'api/v1/authors', type: :request do
       end
 
     post('Создать нового автора') do
+      tags "Авторы"
       let(:author) { attributes_for(:author) }
 
       consumes 'application/json'
@@ -48,6 +50,7 @@ RSpec.describe 'api/v1/authors', type: :request do
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
     get('Получить данные автора') do
+      tags "Авторы"
       description 'Возвращает данные автора вместе с его курсами'
       produces "application/json"
       response(200, 'Успешно') do
@@ -58,6 +61,7 @@ RSpec.describe 'api/v1/authors', type: :request do
     end
 
     put('Изменить данные автора') do
+      tags "Авторы"
       before do
         create(:author, id: 123)
       end
@@ -82,6 +86,7 @@ RSpec.describe 'api/v1/authors', type: :request do
     end
 
     delete('Удалить автора') do
+      tags "Авторы"
       produces 'application/json'
       description 'Прежде чем удалить указанного автора, находит случайного автора и назначает ему курсы удаляемого автора.'
 

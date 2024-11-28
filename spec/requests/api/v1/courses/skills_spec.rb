@@ -5,7 +5,7 @@ RSpec.describe '/api/v1/courses/skills', type: :request do
     parameter name: 'course_id', in: :path, type: :string, description: 'ID of the course'
 
     post 'Создание компетенции для курса' do
-      tags 'Курсы', 'Компетенции'
+      tags 'Компетенции курса'
       consumes 'application/json'
       parameter name: :skill, in: :body, schema: {
         type: :object,
@@ -37,7 +37,7 @@ RSpec.describe '/api/v1/courses/skills', type: :request do
     parameter name: 'skill_id', in: :path, type: :string, description: 'ID of the skill'
 
     delete 'Deltes a skill for a course' do
-      tags 'Skills'
+      tags 'Компетенции курса'
 
       response '204', 'skill deleted' do
         let(:course_id) { create(:course).id }
