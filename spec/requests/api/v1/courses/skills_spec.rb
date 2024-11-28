@@ -4,8 +4,8 @@ RSpec.describe '/api/v1/courses/skills', type: :request do
   path '/api/v1/courses/{course_id}/skills' do
     parameter name: 'course_id', in: :path, type: :string, description: 'ID of the course'
 
-    post 'Creates a skill for a course' do
-      tags 'Skills'
+    post 'Создание компетенции для курса' do
+      tags 'Курсы', 'Компетенции'
       consumes 'application/json'
       parameter name: :skill, in: :body, schema: {
         type: :object,
