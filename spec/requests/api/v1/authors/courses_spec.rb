@@ -1,6 +1,6 @@
 require 'swagger_helper'
 
-RSpec.describe 'Api::V1::Authors::Courses', type: :request do
+RSpec.describe 'V1 Author Courses API', type: :request do
   path '/api/v1/authors/{author_id}/courses' do
     parameter name: 'author_id', in: :path, type: :integer, required: true, description: 'Author ID'
 
@@ -27,6 +27,23 @@ RSpec.describe 'Api::V1::Authors::Courses', type: :request do
 
       response '422', 'invalid request' do
         let(:course) { { title: nil, description: nil } }
+        run_test!
+      end
+    end
+  end
+
+  path '/api/v1/authors/{author_id}/courses/{course_id}' do
+    parameter name: 'author_id', in: :path, type: :string, description: 'author id'
+    parameter name: 'course_id', in: :path, type: :string, description: 'course id'
+
+    get('Получить расширенные данные курса автора') do
+      produces "application/json"
+
+      response(200, 'Успешно') do
+        let!(:author) { create(:author) }
+        let!(:author_id) { author.id }
+        let!(:course_id) { create(:course, author:).id }
+
         run_test!
       end
     end
