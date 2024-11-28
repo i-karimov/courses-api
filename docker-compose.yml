@@ -1,0 +1,54 @@
+x-api-volumes: &api-volumes
+  - .:/app:cached
+  - ~/.ssh:/root/.ssh
+  - ~/.bash_history:/root/.bash_history
+  - ~/.irbrc:/root/.irbrc
+  - bundle_cache:/bundle_cache
+
+x-api-environment: &api-environment
+  - BUNDLE_PATH=/bundle_cache
+  - GEM_HOME=/bundle_cache
+  - GEM_PATH=/bundle_cache:/usr/local/bundle
+  - REDIS_URL=redis://redis:6379/
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes: *api-volumes
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - redis
+    environment: *api-environment
+    command: bash -c "bundle install && bundle exec rake db:create db:migrate && bundle exec puma -C config/puma.rb -e development"
+    stdin_open: true
+    tty: true
+
+  sidekiq:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes: *api-volumes
+    environment: *api-environment
+    command: bundle exec sidekiq
+
+  bundle_cache:
+    image: busybox
+    volumes:
+      - bundle_cache:/bundle_cache
+
+  db:
+    image: postgres:17.2-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=courses_development
+      - POSTGRES_PASSWORD=password
+  redis:
+    image: redis:7.4.1-alpine
+
+volumes:
+  bundle_cache:

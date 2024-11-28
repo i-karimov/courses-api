@@ -1,0 +1,21 @@
+FROM ruby:3.3.0-alpine
+
+RUN apk update && \
+    apk add --no-cache build-base postgresql-dev tzdata imagemagick bash git vim curl
+
+RUN mkdir /app
+WORKDIR /app
+
+COPY Gemfile Gemfile
+COPY Gemfile.lock Gemfile.lock
+
+RUN gem install bundler -v 2.5.14
+RUN bundle install --jobs 3
+
+ADD . /app
+
+EXPOSE $RAILS_PORT
+
+VOLUME ["/app/public"]
+
+CMD bash -c "bundle exec puma -C config/puma.rb"
