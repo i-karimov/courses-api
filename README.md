@@ -9,6 +9,12 @@ Build image:
 docker-compose build
 ```
 
+Run seeds:
+
+```bash
+docker-compose run api bundle exec rails db:seeds
+```
+
 Start app on http://localhost:3000 :
 
 ```bash
