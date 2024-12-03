@@ -3,24 +3,18 @@ require 'swagger_helper'
 RSpec.describe 'api/v1/authors', type: :request do
     path '/api/v1/authors' do
       get('Список авторов') do
+        tags "Авторы"
         produces 'application/json'
 
         parameter(name: 'page', in: :query, required: false, description: 'Номер страницы', type: :integer)
 
         response(200, 'successful') do
-          after do |example|
-            example.metadata[:response][:content] = {
-              'application/json' => {
-                example: JSON.parse(response.body, symbolize_names: true)
-              }
-            }
-          end
-
           run_test!
         end
       end
 
     post('Создать нового автора') do
+      tags "Авторы"
       let(:author) { attributes_for(:author) }
 
       consumes 'application/json'
@@ -37,13 +31,6 @@ RSpec.describe 'api/v1/authors', type: :request do
       }
 
       response(201, 'successful') do
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
 
         it "creates " do |example|
           expect { submit_request(example.metadata) }.to change(Author, :count).by(1)
@@ -63,23 +50,18 @@ RSpec.describe 'api/v1/authors', type: :request do
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
     get('Получить данные автора') do
+      tags "Авторы"
+      description 'Возвращает данные автора вместе с его курсами'
       produces "application/json"
       response(200, 'Успешно') do
         let!(:id) { create(:author).id }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
 
         run_test!
       end
     end
 
     put('Изменить данные автора') do
+      tags "Авторы"
       before do
         create(:author, id: 123)
       end
@@ -99,36 +81,21 @@ RSpec.describe 'api/v1/authors', type: :request do
         let(:id) { 123 }
         let(:author) { attributes_for(:author) }
 
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-
         run_test!
       end
     end
 
     delete('Удалить автора') do
+      tags "Авторы"
       produces 'application/json'
       description 'Прежде чем удалить указанного автора, находит случайного автора и назначает ему курсы удаляемого автора.'
 
       let(:ex_author) { create(:author) }
       let(:id) { ex_author.id }
 
-      
+
       response(200, 'Автор успешно удален. Данные нового автора возвращаются в теле ответа.') do
         before { create(:author) }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
 
         run_test!
       end
