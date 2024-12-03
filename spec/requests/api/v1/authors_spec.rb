@@ -31,7 +31,6 @@ RSpec.describe 'api/v1/authors', type: :request do
       }
 
       response(201, 'Успешный запрос') do
-
         it "creates " do |example|
           expect { submit_request(example.metadata) }.to change(Author, :count).by(1)
           assert_response_matches_metadata(example.metadata)

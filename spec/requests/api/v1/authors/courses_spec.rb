@@ -22,7 +22,7 @@ RSpec.describe 'V1 Author Courses API', type: :request do
         run_test!
       end
     end
-    
+
     post 'Добавить автору новый курс' do
       tags "Курсы автора"
       let(:author_id) { create(:author).id }

@@ -351,6 +351,9 @@ DEPENDENCIES
   rswag-api
   rswag-specs
   rswag-ui
+  rubocop
+  rubocop-performance
+  rubocop-rails
   rubocop-rails-omakase
   sidekiq
   tzinfo-data

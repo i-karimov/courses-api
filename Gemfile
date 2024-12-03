@@ -50,6 +50,9 @@ end
 
 group :development do
   gem "letter_opener"
+  gem "rubocop"
+  gem "rubocop-performance"
+  gem "rubocop-rails"
 end
 
 gem "rswag-api"

@@ -8,13 +8,12 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :authors do
-        resources :courses, only: [ :index, :show, :create, :update, :destroy ], controller: 'authors/courses'
+        resources :courses, only: [ :index, :show, :create, :update, :destroy ], controller: "authors/courses"
       end
 
       resources :courses, only: [ :index, :show ] do
-        resources :skills, only: [ :index, :create, :destroy ], controller: 'courses/skills'
+        resources :skills, only: [ :index, :create, :destroy ], controller: "courses/skills"
       end
-
 
       resources :skills, only: [ :index, :create, :destroy ]
     end
