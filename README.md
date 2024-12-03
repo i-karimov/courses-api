@@ -1,24 +1,34 @@
-# README
+# Courses demo API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## QUICKSTART IN DOCKER
 
-* Ruby version
+Build image:
 
-* System dependencies
+```bash
+docker-compose build
+```
 
-* Configuration
+Start app on http://localhost:3000 :
 
-* Database creation
+```bash
+docker-compose up
+```
 
-* Database initialization
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+Run tests:
 
-* Deployment instructions
+```bash
+docker-compose run --rm api bundle exec rspec
+```
 
-* ...
+Run shell in new container:
+
+```bash
+docker-compose run --rm api bash
+```
+
+## API DOCUMENTATION
+
+See documentation on http://localhost:3000/api-docs
