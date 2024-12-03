@@ -10,7 +10,7 @@ paths:
     - name: author_id
       in: path
       required: true
-      description: Author ID
+      description: ID автора
       schema:
         type: integer
     get:
@@ -52,17 +52,17 @@ paths:
     - name: author_id
       in: path
       required: true
-      description: Author ID
+      description: ID автора
       schema:
         type: integer
     - name: id
       in: path
       required: true
-      description: Course ID
+      description: ID курса
       schema:
         type: integer
     get:
-      summary: Show a course
+      summary: Показать курс автора
       tags:
       - Курсы автора
       responses:
@@ -117,7 +117,7 @@ paths:
           type: integer
       responses:
         '200':
-          description: successful
+          description: Успешный запрос
     post:
       summary: Создать нового автора
       tags:
@@ -125,7 +125,7 @@ paths:
       parameters: []
       responses:
         '201':
-          description: successful
+          description: Успешный запрос
         '422':
           description: Отсутствуют необходимые поля
       requestBody:
@@ -149,7 +149,7 @@ paths:
     parameters:
     - name: id
       in: path
-      description: id
+      description: ID автора
       required: true
       schema:
         type: string
@@ -168,7 +168,7 @@ paths:
       parameters: []
       responses:
         '200':
-          description: successful
+          description: Успешный запрос
       requestBody:
         content:
           application/json:
@@ -201,7 +201,7 @@ paths:
     parameters:
     - name: course_id
       in: path
-      description: ID of the course
+      description: ID курса
       required: true
       schema:
         type: string
@@ -211,7 +211,7 @@ paths:
       - Компетенции курса
       responses:
         '200':
-          description: successful
+          description: Успешный запрос
     post:
       summary: Создание компетенции для курса
       tags:
@@ -219,9 +219,9 @@ paths:
       parameters: []
       responses:
         '201':
-          description: skill created
+          description: Компетенция создана
         '422':
-          description: invalid request
+          description: Недопустимый запрос
       requestBody:
         content:
           application/json:
@@ -238,25 +238,25 @@ paths:
     parameters:
     - name: course_id
       in: path
-      description: ID of the course
+      description: ID курса
       required: true
       schema:
         type: string
     - name: skill_id
       in: path
-      description: ID of the skill
+      description: ID компетенции
       required: true
       schema:
         type: string
     delete:
-      summary: Deltes a skill for a course
+      summary: Удаляет компетенцию у курса
       tags:
       - Компетенции курса
       responses:
         '204':
-          description: skill deleted
+          description: Компетенция курса удалена
         '404':
-          description: skill not found
+          description: Компетенция не найдена
 servers:
 - url: http://localhost:3000
   variables: {}

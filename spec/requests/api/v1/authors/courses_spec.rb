@@ -2,7 +2,7 @@ require 'swagger_helper'
 
 RSpec.describe 'V1 Author Courses API', type: :request do
   path '/api/v1/authors/{author_id}/courses' do
-    parameter name: 'author_id', in: :path, type: :integer, required: true, description: 'Author ID'
+    parameter name: 'author_id', in: :path, type: :integer, required: true, description: 'ID автора'
 
     get 'Получить список курсов автора' do
       tags 'Курсы автора'
@@ -53,8 +53,8 @@ RSpec.describe 'V1 Author Courses API', type: :request do
   end
 
   path '/api/v1/authors/{author_id}/courses/{id}' do
-    parameter name: 'author_id', in: :path, type: :integer, required: true, description: 'Author ID'
-    parameter name: 'id', in: :path, type: :integer, required: true, description: 'Course ID'
+    parameter name: 'author_id', in: :path, type: :integer, required: true, description: 'ID автора'
+    parameter name: 'id', in: :path, type: :integer, required: true, description: 'ID курса'
 
     get 'Показать курс автора' do
       tags 'Курсы автора'

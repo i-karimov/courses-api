@@ -8,7 +8,7 @@ RSpec.describe 'api/v1/authors', type: :request do
 
         parameter(name: 'page', in: :query, required: false, description: 'Номер страницы', type: :integer)
 
-        response(200, 'successful') do
+        response(200, 'Успешный запрос') do
           run_test!
         end
       end
@@ -30,7 +30,7 @@ RSpec.describe 'api/v1/authors', type: :request do
         required: [ 'first_name', 'last_name', 'email' ]
       }
 
-      response(201, 'successful') do
+      response(201, 'Успешный запрос') do
 
         it "creates " do |example|
           expect { submit_request(example.metadata) }.to change(Author, :count).by(1)
@@ -47,7 +47,7 @@ RSpec.describe 'api/v1/authors', type: :request do
   end
 
   path '/api/v1/authors/{id}' do
-    parameter name: 'id', in: :path, type: :string, description: 'id'
+    parameter name: 'id', in: :path, type: :string, description: 'ID автора'
 
     get('Получить данные автора') do
       tags "Авторы"
@@ -77,7 +77,7 @@ RSpec.describe 'api/v1/authors', type: :request do
         required: [ 'first_name', 'last_name', 'email' ]
       }
 
-      response(200, 'successful') do
+      response(200, 'Успешный запрос') do
         let(:id) { 123 }
         let(:author) { attributes_for(:author) }
 

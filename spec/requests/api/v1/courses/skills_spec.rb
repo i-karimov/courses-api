@@ -2,13 +2,13 @@ require 'swagger_helper'
 
 RSpec.describe '/api/v1/courses/skills', type: :request do
   path '/api/v1/courses/{course_id}/skills' do
-    parameter name: 'course_id', in: :path, type: :string, description: 'ID of the course'
+    parameter name: 'course_id', in: :path, type: :string, description: 'ID курса'
 
     get 'Получить список компетенций курса' do
       tags 'Компетенции курса'
       produces 'application/json'
 
-      response '200', 'successful' do
+      response '200', 'Успешный запрос' do
         let(:author) { create(:author) }
         let(:course_id) { create(:course, author:, skills: create_list(:skill, 3)).id }
 
@@ -28,14 +28,14 @@ RSpec.describe '/api/v1/courses/skills', type: :request do
         required: [ 'name' ]
       }
 
-      response '201', 'skill created' do
+      response '201', 'Компетенция создана' do
         let(:course_id) { create(:course).id }
         let(:skill) { { name: 'New Skill', description: 'Description of the new skill' } }
 
         run_test!
       end
 
-      response '422', 'invalid request' do
+      response '422', 'Недопустимый запрос' do
         let(:course_id) { create(:course).id }
         let(:skill) { { name: nil } }
 
@@ -45,13 +45,13 @@ RSpec.describe '/api/v1/courses/skills', type: :request do
   end
 
   path '/api/v1/courses/{course_id}/skills/{skill_id}' do
-    parameter name: 'course_id', in: :path, type: :string, description: 'ID of the course'
-    parameter name: 'skill_id', in: :path, type: :string, description: 'ID of the skill'
+    parameter name: 'course_id', in: :path, type: :string, description: 'ID курса'
+    parameter name: 'skill_id', in: :path, type: :string, description: 'ID компетенции'
 
-    delete 'Deltes a skill for a course' do
+    delete 'Удаляет компетенцию у курса' do
       tags 'Компетенции курса'
 
-      response '204', 'skill deleted' do
+      response '204', 'Компетенция курса удалена' do
         let(:course_id) { create(:course).id }
         let(:skill_id) { create(:skill).id }
         before do
@@ -61,7 +61,7 @@ RSpec.describe '/api/v1/courses/skills', type: :request do
         run_test!
       end
 
-      response '404', 'skill not found' do
+      response '404', 'Компетенция не найдена' do
         let(:course_id) { create(:course).id }
         let(:skill_id) { 'invalid' }
 
