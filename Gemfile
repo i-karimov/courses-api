@@ -57,7 +57,7 @@ end
 
 gem "rswag-api"
 gem "rswag-ui"
-gem "pagy", "~> 9.2"
+gem "pagy", "~> 9.3"
 gem "dry-monads"
 gem "dry-initializer"
 gem "sidekiq"
